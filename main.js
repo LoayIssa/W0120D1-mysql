@@ -1,0 +1,31 @@
+const express = require('express');
+const app = express();
+app.use(express.json())
+require('dotenv').config();
+
+
+const db = require('./db');
+
+const book = require('./books');
+/* ==================== */
+
+// console.log('HHHHHHHHHHHHHHHHHHHHHHHHHH:',users);
+// users.findAll();
+
+// app.get('/users', users.findAll);
+// app.get('/users/email', users.findEmail);
+app.post("/books",book.insertNewBook);
+app.get("/books",book.getBooks)
+app.get("/books/dec",book.booksDescending)
+app.get("/books/noPrice",book.getBookWithoutPrice)
+app.get("/books/price",book.getBookWithPrice)
+app.put("/books/:book_id",book.updateBookById)
+
+
+
+/* ==================== */
+
+const PORT = 3000;
+app.listen(PORT, () => {
+  console.log('SERVER IS WORKING ON http://localhost:' + PORT);
+});
